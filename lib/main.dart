@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.intro,
       getPages: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Voting app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
