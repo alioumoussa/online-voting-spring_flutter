@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Électeurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .action-buttons button {
+            padding: 8px 12px;
+            margin-right: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .action-buttons button.edit {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .action-buttons button.delete {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+   <!-- Inclure la navbar et la sidebar -->
+<div th:replace="~{navbar-sidebar :: navbar-sidebar}">
+    <!-- Contenu spécifique à inclure -->
+</div>
+
+
+<h2>Liste des Électeurs</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
+        <th>Numéro d'identification</th>
+        <th>Numéro de téléphone</th>
+        <th>Date de naissance</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Utiliser Thymeleaf pour itérer sur la liste des électeurs -->
+    <tr th:each="electeur : ${electeurs}">
+        <td th:text="${electeur.nom}"></td>
+        <td th:text="${electeur.prenom}"></td>
+        <td th:text="${electeur.adresse}"></td>
+        <td th:text="${electeur.numeroIdentification}"></td>
+        <td th:text="${electeur.numeroTelephone}"></td>
+        <td th:text="${#temporals.format(electeur.dateNaissance,'dd-MM-yyyy')}"></td>
+        <td class="action-buttons">
+            <button class="edit" onclick="modifierElecteur(${electeur.id})"><i class="fas fa-edit"></i> Modifier</button>
+            <button class="delete" onclick="supprimerElecteur(${electeur.id})"><i class="fas fa-trash-alt"></i> Supprimer</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<!-- Script pour les actions -->
+<script>
+    // Fonction pour rediriger vers la page de modification avec l'ID de l'électeur
+    function modifierElecteur(id) {
+        window.location.href = '/modifier/' + id;
+    }
+
+    // Fonction pour envoyer une requête de suppression à l'électeur avec l'ID correspondant
+    function supprimerElecteur(id) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer cet électeur?')) {
+            fetch('/supprimer/' + id, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Erreur lors de la suppression de l\'électeur.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur s\'est produite lors de la suppression de l\'électeur.');
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

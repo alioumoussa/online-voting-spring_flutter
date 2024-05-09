@@ -1,0 +1,32 @@
+
+GET https://192.168.62.11:8080/votes/
+###
+
+POST https://192.168.62.11:8080/votes/
+Content-Type:  application/json
+
+{
+
+    
+    "candidat": {
+      "id": 1,
+      "nom": "Mohamed ould Ahmed ",
+      "photoUrl": "https://example.com/photo.jpg",
+      "dateNaissance": "1990-01-01",
+      "partiPolitique": {
+        "id": 1,
+        "description": "Un parti d'opposition historique, le RFD défend les principes démocratiques, les libertés individuelles et les droits de l'homme, tout en appelant à des réformes politiques et économiques",
+        "programme": "Éducation : Augmentation du budget alloué à l'éducation nationale pour améliorer la qualité de l'enseignement. Construction de nouvelles écoles et rénovation des infrastructures existantes. Promotion de l'éducation civique et des valeurs démocratiques dans les établissements scolaires.\n\nEmploi et Économie : Création d'emplois par le biais de programmes de développement économique et d'incitations à l'investissement. Promotion de l'entrepreneuriat et du développement des petites et moyennes entreprises (PME). Renforcement des politiques de protection sociale pour lutter contre la pauvreté et les inégalités.\nSanté : Amélioration de l'accès aux soins de santé primaires et renforcement des infrastructures médicales. Promotion de la prévention des maladies et de la santé publique. Renforcement des services de santé maternelle et infantile.\nDroits de l'Homme et Justice : Promotion et protection des droits de l'homme et des libertés individuelles. Réforme judiciaire visant à garantir l'indépendance de la magistrature et l'accès équitable à la justice pour tous. Lutte contre la corruption et l'impunité.\nEnvironnement : Adoption de politiques environnementales durables pour la préservation des ressources naturelles et la lutte contre le changement climatique. Protection des écosystèmes fragiles et promotion de la gestion durable des ressources naturelles.\nRelations Internationales : Promotion de la coopération régionale et internationale pour le développement économique et social. Respect des principes de paix, de sécurité et de coopération entre les nations. Engagement en faveur de la solidarité et de l'entraide internationale.\nCe programme électoral est conçu pour répondre aux besoins et aux aspirations des citoyens mauritaniens, en mettant l'accent sur le développement socio-économique, la protection des droits fondamentaux et la promotion de la démocratie et de l'État de droit.",
+        "photoURL": "photoURL",
+        "dateFondation": "2022-01-15",
+        "nom": "RFD"
+      }
+    },
+    "election": {
+      "id": 1,
+      "titre": "Élection présidentielle",
+      "dateDebut": "2024-06-01T08:00:00",
+      "dateFin": "2024-06-02T20:00:00"
+    },
+    "dateVote": "2024-03-03T00:00:00"
+  }

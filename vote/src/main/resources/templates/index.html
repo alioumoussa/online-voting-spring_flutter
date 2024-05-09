@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription Électeur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+<h2>Inscription Électeur</h2>
+
+<form th:action="@{/electeurs/}" method="post" th:object="${electeur}">
+    <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" th:field="*{nom}" required>
+    </div>
+    <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" th:field="*{prenom}" required>
+    </div>
+    <div>
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" name="adresse" th:field="*{adresse}" required>
+    </div>
+    <div>
+        <label for="numeroIdentification">Numéro d'identification :</label>
+        <input type="text" id="numeroIdentification" name="numeroIdentification" th:field="*{numeroIdentification}" required>
+    </div>
+    <div>
+        <label for="numeroTelephone">Numéro de téléphone :</label>
+        <input type="text" id="numeroTelephone" name="numeroTelephone" th:field="*{numeroTelephone}" required>
+    </div>
+    <div>
+        <label for="dateNaissance">Date de naissance :</label>
+        <input type="date" id="dateNaissance" name="dateNaissance" th:field="*{dateNaissance}" required>
+    </div>
+
+    <button type="submit">S'inscrire</button>
+</form>
+</section>
+</body>
+</html>

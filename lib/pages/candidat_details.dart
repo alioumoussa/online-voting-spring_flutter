@@ -137,16 +137,14 @@ class CandidatDetails extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                Obx(
-                  () =>
-                      // final isAuthenticate = electeurController.isLogedIn.value;
-                      //  Electeur el = electeurController.electeur.value;
-                      TextButton(
-                    onPressed: (() {
-                      // if (!electeurController.isLogedIn.value) {
-                      //   // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
-                      //   Get.toNamed('/auth');
-                      // } else if (!electeurController.electeur.value.voted!) {
+                TextButton(
+                  onPressed: () {
+                    final isAuthenticated = electeurController.isLogedIn.value;
+                    final el = electeurController.electeur.value;
+                    if (!isAuthenticated) {
+                      // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+                      Get.toNamed('/auth');
+                    } else if (!el.voted!) {
                       // Permettez à l'utilisateur de voter s'il est connecté et n'a pas encore voté
                       Vote v = Vote(
                         candidat: candidat,
@@ -154,44 +152,61 @@ class CandidatDetails extends StatelessWidget {
                         dateVote: DateTime.now(),
                       );
                       VoteService.createVote(v);
-                      // } else {
-                      //   // Redirection vers une page indiquant que l'utilisateur a déjà voté
-                      //   Get.toNamed('/home');
-                      // }
-                      // // print('Voter');
-                      // Vote v = Vote(
-                      //     candidat: candidat,
-                      //     election: voteController.election.value,
-                      //     dateVote: DateTime.now());
-                      // VoteService.createVote(v);
-                    }),
-                    child: Container(
-                      width: 200,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          color: Colors.white),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Clic to vote",
-                            style: TextStyle(
-                              color: primaryColor,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.arrow_forward,
-                            color: primaryColor,
-                          )
-                        ],
-                      ),
-                    ),
+                    } else {
+                      // Redirection vers une page indiquant que l'utilisateur a déjà voté
+                      Get.toNamed('/details');
+                    }
+                  },
+                  child: Obx(() {
+  final isAuthenticated = electeurController.isLogedIn.value;
+  final el = electeurController.electeur.value;
+  final hasVoted = el.voted!;
+  return Container(
+    width: 200,
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(40),
+      color: !isAuthenticated
+          ? Colors.blue
+          : hasVoted
+              ? Colors.grey
+              : Colors.white,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          !isAuthenticated
+              ? "Connectez-vous"
+              : hasVoted
+                  ? "Déjà voté"
+                  : "Clic to vote",
+          style: TextStyle(
+            color: isAuthenticated
+                ? Colors.white
+                : hasVoted
+                    ? Colors.white
+                    : primaryColor,
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Icon(
+          !isAuthenticated || hasVoted
+              ? Icons.lock
+              : Icons.arrow_forward,
+          color: !isAuthenticated || hasVoted
+              ? Colors.white
+              : primaryColor,
+        )
+      ],
+    ),
+  );
+}),
+                
                   ),
-                ),
+                
               ],
             ),
           )

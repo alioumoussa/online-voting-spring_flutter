@@ -64,8 +64,8 @@ class IntroPage extends StatelessWidget {
               text: "Get started",
               onTap: () {
                 print("On m'a tappe");
-                Get.toNamed('/home');
-                // Get.toNamed('/auth');
+                // Get.toNamed('/home');
+                Get.toNamed('/auth');
               },
             )
           ],

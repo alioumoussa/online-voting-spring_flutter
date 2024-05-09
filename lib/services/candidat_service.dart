@@ -5,8 +5,8 @@ import 'package:vote/models/Candidat.dart';
 import '../models/Election.dart';
 
 class CandidatService {
-  static const String baseUrl = 'https://192.168.177.11:8080/candidats/';
-  static const String baseUrl1 = 'https://192.168.177.11:8080/elections/1';
+  static const String baseUrl = 'https://192.168.107.11:8080/candidats/';
+  static const String baseUrl1 = 'https://192.168.107.11:8080/elections/1';
 
   static Future<List<Candidat>> getCandidats() async {
     // Map<String, String> headers = {

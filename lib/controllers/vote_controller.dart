@@ -9,6 +9,7 @@ import '../models/Vote.dart';
 class VoteController extends GetxController {
   final election = Election().obs;
   // final votes = <Vote>[].obs;
+  final voteService = VoteService();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -27,17 +28,4 @@ class VoteController extends GetxController {
     }
   }
 
-  // void getVotes() async {
-  //   try {
-  //     final List<Vote> fetchedVotes = await VoteService().getAllVotes();
-  //     votes.assignAll(fetchedVotes);
-  //   } catch (e) {
-  //     print('Erreur lors de la récupération des votes: $e');
-  //   }
-  // }
-
-  // // Fonction pour filtrer les votes par ID de candidat
-  // List<Vote> filterVotesByCandidat(int candidatId) {
-  //   return votes.where((vote) => vote.candidat.id == candidatId).toList();
-  // }
 }

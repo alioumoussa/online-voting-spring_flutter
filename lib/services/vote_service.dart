@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:vote/controllers/electeur_controller.dart';
 import 'package:vote/models/Vote.dart';
+import 'package:vote/services/electeur_service.dart';
 
 class VoteService {
-  static const String baseUrl = 'https://192.168.177.11:8080/votes/';
+  static const String baseUrl = 'https://192.168.107.11:8080/votes/';
 
   static Future<void> createVote(Vote vote) async {
     final response = await http.post(
@@ -17,6 +19,8 @@ class VoteService {
     if (response.statusCode != 200) {
       throw Exception('Failed to create vote');
     } else {
+      ElecteurService()
+          .updateVoteStatus(ElecteurController().electeur.value.id.toString());
       print("Vote stocke");
     }
   }
